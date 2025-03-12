@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 import cors from 'cors'
+import cvUserRoutes from './routes/cvUserRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -31,6 +32,7 @@ connection.once("open",() => {
     console.log("Database Connected!!");
 })
 
+app.use("/api/cvuser",cvUserRoutes)
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")

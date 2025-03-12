@@ -1,4 +1,4 @@
-import cvUsers from "../models/cvUserModel";
+import cvUsers from "../models/cvUserModel.js";
 
 export async function createCvUserDetails(req,res){
     try {
