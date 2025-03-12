@@ -1,9 +1,9 @@
 import express from "express";
-import { createCvUserDetails } from "../controllers/cvUserControllers.js";
+import { createCvUserDetails, getcvUsers } from "../controllers/cvUserControllers.js";
 
 const cvUserRoutes = express.Router()
 
 cvUserRoutes.post("/",createCvUserDetails);
-
+cvUserRoutes.get("/:userId",getcvUsers)
 
 export default cvUserRoutes
