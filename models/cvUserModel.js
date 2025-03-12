@@ -24,13 +24,11 @@ const cvuserSchema = mongoose.Schema({
         type: String,
         required: true, 
         unique: true, 
-        match: [/^\S+@\S+\.\S+$/, 'Please use a valid email address.'], 
         trim: true
     },
     phone: {
         type: String,
         required: true, 
-        match: [/^\+?[1-9]\d{1,14}$/, 'Please use a valid phone number.'] 
     },
     profilePhoto: {
         type: String,

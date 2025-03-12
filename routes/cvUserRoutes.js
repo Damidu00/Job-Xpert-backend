@@ -1,5 +1,5 @@
 import express from "express";
-import { createCvUserDetails } from "../controllers/cvUserControllers";
+import { createCvUserDetails } from "../controllers/cvUserControllers.js";
 
 const cvUserRoutes = express.Router()
 
