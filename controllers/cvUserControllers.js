@@ -30,3 +30,18 @@ export async function getcvUsers(req,res){
         })
     }
 }
+
+export async function deletecvuser(req,res){
+    const userId = req.params.userId
+    try {
+        await cvUsers.deleteOne({userId : userId})
+        res.json({
+            message : "cvuser details deleted"
+        })
+    } catch (error) {
+        res.json({
+            message : "error to delete",
+            error : error.message
+        })
+    }
+}
