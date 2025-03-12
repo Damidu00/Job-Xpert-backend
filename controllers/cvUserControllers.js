@@ -17,3 +17,16 @@ export async function createCvUserDetails(req,res){
         })
     }
 }
+
+export async function getcvUsers(req,res){
+    const userId = req.params.userId
+    try {
+        const cvUser = await cvUsers.findOne({userId : userId})
+
+        res.json(cvUser)
+    } catch (error) {
+        res.json({
+            message : "cannot find the user"
+        })
+    }
+}
