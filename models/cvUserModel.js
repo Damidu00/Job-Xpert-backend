@@ -58,5 +58,5 @@ const cvuserSchema = mongoose.Schema({
     },
 })
 
-const cvUserModel = mongoose.model("cvUserDetails",cvuserSchema)
-export default cvUserModel
+const cvUsers = mongoose.model("cvUserDetails",cvuserSchema)
+export default cvUsers
