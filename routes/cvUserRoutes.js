@@ -6,4 +6,6 @@ const cvUserRoutes = express.Router()
 cvUserRoutes.post("/",createCvUserDetails);
 cvUserRoutes.get("/:userId",getcvUsers)
 cvUserRoutes.delete("/:userId",deletecvuser)
+
+
 export default cvUserRoutes
