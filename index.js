@@ -8,6 +8,7 @@ import cvUserRoutes from './routes/cvUserRoutes.js';
 import skillsRoutes from './routes/skillsroutes.js';
 import certificates from './routes/certificatesRoutes.js';
 import refereeRoutes from './routes/refereesRoutes.js';
+import educationRoutes from './routes/educationRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -39,6 +40,7 @@ app.use("/api/cvuser",cvUserRoutes)
 app.use("/api/skills",skillsRoutes)
 app.use("/api/certificates",certificates)
 app.use("/api/referees",refereeRoutes)
+app.use("/api/education",educationRoutes)
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")
