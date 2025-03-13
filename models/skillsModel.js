@@ -5,6 +5,10 @@ const skillSchema = mongoose.Schema({
       type : String,
       required: true
     },
+    cvId : {
+      type : String,
+      required : true
+    },
     skills: [
       {
         category: { type: String, required: true },
