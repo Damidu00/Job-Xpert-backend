@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const skillSchema = mongoose.Schema({
     userId: {
-      ref: 'User',
+      type : String,
       required: true
     },
     skills: [

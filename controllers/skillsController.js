@@ -1,4 +1,4 @@
-import Skills from "../models/skillsModel"
+import Skills from "../models/skillsModel.js"
 
 export async function createSkills(req,res){
     try {
@@ -13,6 +13,19 @@ export async function createSkills(req,res){
         res.status(500).json({
             message : "error to create skills",
             error: error.message
+        })
+    }
+}
+
+export async function getSkills(req,res){
+    const userId = req.params.userId
+    try {
+        const skills = await Skills.findOne({userId : userId})
+        res.json(skills)
+    } catch (error) {
+        res.status(500).json({
+            message : "error to fetch users",
+            error : error.message
         })
     }
 }
