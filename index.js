@@ -10,6 +10,7 @@ import certificates from './routes/certificatesRoutes.js';
 import refereeRoutes from './routes/refereesRoutes.js';
 import educationRoutes from './routes/educationRoutes.js';
 import ExperienceRoutes from './routes/experienceRoutes.js';
+import ProjectRouter from './routes/projectsRouter.js';
 
 dotenv.config()
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api/certificates",certificates)
 app.use("/api/referees",refereeRoutes)
 app.use("/api/education",educationRoutes)
 app.use("/api/experience",ExperienceRoutes)
+app.use("/api/projects",ProjectRouter)
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")
