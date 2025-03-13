@@ -6,6 +6,7 @@ import dotenv from "dotenv"
 import cors from 'cors'
 import cvUserRoutes from './routes/cvUserRoutes.js';
 import skillsRoutes from './routes/skillsroutes.js';
+import certificates from './routes/certificatesRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -35,6 +36,7 @@ connection.once("open",() => {
 
 app.use("/api/cvuser",cvUserRoutes)
 app.use("/api/skills",skillsRoutes)
+app.use("/api/certificates",certificates)
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")
