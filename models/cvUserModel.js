@@ -4,7 +4,8 @@ const cvuserSchema = mongoose.Schema({
 
     userId : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     cvId : {
         type : String,
