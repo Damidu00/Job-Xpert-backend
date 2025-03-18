@@ -11,6 +11,7 @@ import refereeRoutes from './routes/refereesRoutes.js';
 import educationRoutes from './routes/educationRoutes.js';
 import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
+import userRouter from './routes/userRoutes.js';
 
 dotenv.config()
 const app = express();
@@ -45,6 +46,94 @@ app.use("/api/referees",refereeRoutes)
 app.use("/api/education",educationRoutes)
 app.use("/api/experience",ExperienceRoutes)
 app.use("/api/projects",ProjectRouter)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// user routes
+app.use("/api/users",userRouter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//company routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//job-listing  route
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")
