@@ -1,53 +1,57 @@
 import { User } from "../models/UserModel.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from '../utils/cloudinary.js'
 
-
-
-export const register = async (req,res) => {
+export const register = async (req, res) => {
     try {
+        const { fullname, email, phoneNumber, password, role } = req.body;
 
-        const {fist_name, last_name, email, password, telephone, role}=req.body;
-
-        if(!fist_name || !last_name || !email|| !password|| !telephone|| !role) {
-            return res.ststus(400).json({
-                message:"Something is missing",
-                success:false
+        if (!fullname || !email || !phoneNumber || !password || !role) {
+            return res.status(400).json({
+                message: "Something is missing",
+                success: false
             });
         };
-        const file =req.file;
-        const fileUri =getDatauri(file);
-        const cloudRespone = await cloudinary.uploader.upload(fileUri.content);
-
-        const user = await User.findOne({email}); 
-        if(user){
+        // const file = req.file;
+        // console.log(file)
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        
+        const user = await User.findOne({ email });
+        if (user) {
             return res.status(400).json({
-                message:'User already exist with this email.',
-                success:false,
+                message: 'User already exist with this email.',
+                success: false,
+                
             })
+            
         }
-
-        const hashedPassword = await bcrypt.hash(password,10);
+       
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         await User.create({
-            fist_name,
-            last_name, 
-            email, 
-            password : hashedPassword,
-            telephone, 
+            fullname,
+            email,
+            phoneNumber,
+            password: hashedPassword,
             role,
             profile:{
-                profilePhoto:cloudRespone.secure_url
+                profilePhoto:"",
             }
         });
 
         return res.status(201).json({
-            message:'Account created Successfully. 👍',
-            success:true
+            message: "Account created successfully.",
+            success: true
         });
-   
     } catch (error) {
-      console.log(error);  
+        console.log(error);
     }
 }
+
+
 export const login = async (req,res)=>{
     try {
 
@@ -88,14 +92,13 @@ export const login = async (req,res)=>{
 
         user ={
             _id:user._id,
-            first_name:user.first_name,
-            last_name:user.last_name,
+            fullname:user.fullname,
             telephone:user.telephone,
             role:user.role,
             profile:user.profile
         }
         return res.status(200).cookie("token", token, { maxAge: 1 * 24 * 60 * 60 * 1000, httpsOnly: true, sameSite: 'strict' }).json({
-            message: `Welcome back ${user.first_name}`,
+            message: `Welcome back ${user.fullname}`,
             user,
             success: true
         })
@@ -123,23 +126,25 @@ export const logout = async (req, res) => {
         console.log(error);
     }
 }
+
+
 export const updateProfile = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, bio, skills } = req.body;
-        
-        const file = req.file;
-        // cloudinary ayega idhar
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-
-
+ 
+        // const file = req.file;
+        // // cloudinary ayega idhar
+        // const fileUri = getDataUri(file);
+        // const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         let skillsArray;
         if(skills){
             skillsArray = skills.split(",");
         }
+
         const userId = req.id; // middleware authentication
         let user = await User.findById(userId);
+        console.log(userId)
 
         if (!user) {
             return res.status(400).json({
@@ -155,14 +160,14 @@ export const updateProfile = async (req, res) => {
         if(skills) user.profile.skills = skillsArray
       
         // resume comes later here...
-        if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url // save the cloudinary url
-            user.profile.resumeOriginalName = file.originalname // Save the original file name
-        }
+        // if(cloudResponse){
+        //     user.profile.resume = cloudResponse.secure_url // save the cloudinary url
+        //     user.profile.resumeOriginalName = file.originalname // Save the original file name
+        // }
 
 
         await user.save();
-
+       
         user = {
             _id: user._id,
             fullname: user.fullname,
