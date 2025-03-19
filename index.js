@@ -12,6 +12,7 @@ import educationRoutes from './routes/educationRoutes.js';
 import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
 import userRouter from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config()
 const app = express();
@@ -21,6 +22,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json())
 
+//user 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
+const corsOptions = {
+    origin:'http://localhost:5173',
+    credentials:true
+}
 
 
 
