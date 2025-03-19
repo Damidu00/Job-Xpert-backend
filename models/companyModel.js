@@ -22,9 +22,11 @@ const companySchema = new mongoose.Schema({
         tyep:String
     },
     userId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
-        required:true
+        type:String,
+        
+        // type:mongoose.Schema.Types.ObjectId,     //must undo this after create userId token......
+        // ref:'User',
+        // required:true
     }
 
 
