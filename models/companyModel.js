@@ -1,5 +1,3 @@
-import { type } from "express/lib/response";
-import timespan from "jsonwebtoken/lib/timespan";
 import mongoose from "mongoose";
 
 const companySchema = new mongoose.Schema({

@@ -12,6 +12,9 @@ import educationRoutes from './routes/educationRoutes.js';
 import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
 import userRouter from './routes/userRoutes.js';
+import companyRoutes from './routes/companyRoutes.js';
+
+
 
 dotenv.config()
 const app = express();
@@ -99,8 +102,7 @@ app.use("/api/users",userRouter)
 
 
 //company routes
-
-
+app.use("/api/company",companyRoutes)
 
 
 

@@ -37,7 +37,7 @@ export const getCompany = async (req,res) => {
         const companies = await Company.find({userId});
         if(!companies) {
             return res.status(404).json({
-                message:"compaies not found.",
+                message:"companies not found.",
                 success:false
             })
         }
@@ -53,7 +53,7 @@ export const getCompanyById = async (req,res) => {
         const company = await Company.findById(companyId);
         if(!company){
             return res.status(404).json({
-                message:"compaies not found.",
+                message:"companies not found.",
                 success:false
             })
         }
@@ -77,7 +77,7 @@ export const getupdateCompany = async (req,res) =>{
 
         if(!company){
             return res.status(404).json({
-                message:"compaies not found.",
+                message:"companies not found.",
                 success:false
             })
         }
