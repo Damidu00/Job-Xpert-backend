@@ -20,6 +20,7 @@ export async function createCvUserDetails(req,res){
 
 export async function getcvUsers(req,res){
     const userId = req.params.userId
+    // console.log(userId)
     try {
         const cvUser = await cvUsers.findOne({userId : userId})
 
