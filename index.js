@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 import cors from 'cors'
+import verifyToken from "./middlewares/authMiddleware.js";
 import cvUserRoutes from './routes/cvUserRoutes.js';
 import skillsRoutes from './routes/skillsroutes.js';
 import certificates from './routes/certificatesRoutes.js';
@@ -18,18 +19,18 @@ dotenv.config()
 const app = express();
 
 
-
-app.use(cors());
+const corsOptions = {
+    origin:'http://localhost:5173',
+    credentials:true
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
 //user 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions = {
-    origin:'http://localhost:5173',
-    credentials:true
-}
+
 
 
 
