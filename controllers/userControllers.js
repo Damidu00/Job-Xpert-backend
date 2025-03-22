@@ -8,7 +8,7 @@ import {createResponse} from "../utils/responseUtils.js";
 export const register = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, password, role } = req.body;
-        console.log(fullname, email, phoneNumber, password, role);
+    console.log(fullname, email, phoneNumber, password, role);
         
 
         if (!fullname || !email || !phoneNumber || !password || !role) {
@@ -18,7 +18,7 @@ export const register = async (req, res) => {
             });
         };
         const file = req.file;
-        console.log(file)
+  console.log(file)
         const fileUri = getDataUri(file);
         const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
         
@@ -41,7 +41,7 @@ export const register = async (req, res) => {
             password: hashedPassword,
             role,
             profile:{
-                profilePhoto:"",
+                profilePhoto:cloudResponse.secure_url,
             }
         });
 
@@ -59,7 +59,7 @@ export const login = async (req,res)=>{
     try {
 
         const {email, password,role}=req.body;
-        console.log({email, password,role})
+  console.log({email, password,role})
 
         if(!email ||!password || !role){
             return res.status(400).json({
@@ -108,15 +108,6 @@ export const login = async (req,res)=>{
          
         return res.send(createResponse(response));
         
-            
-          /*const token = jwt.sign({ userId: user._id, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
-
-        res.status(200).json({
-            message: `Welcome back ${user.first_name}`,
-            token, // Send token in response
-            user,
-            success: true
-        });*/
 
     } catch (error) {
         console.log(error);
@@ -191,3 +182,15 @@ export const updateProfile = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
+
+ /* line 112 const token = jwt.sign({ userId: user._id, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
+
+        res.status(200).json({
+            message: `Welcome back ${user.first_name}`,
+            token, // Send token in response
+            user,
+            success: true
+        });*/
