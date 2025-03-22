@@ -4,6 +4,10 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from '../utils/cloudinary.js'
 import {createResponse} from "../utils/responseUtils.js";
+import dotenv from 'dotenv';
+
+
+dotenv.config();
 
 export const register = async (req, res) => {
     try {
@@ -185,6 +189,49 @@ export const updateProfile = async (req, res) => {
 
 
 
+
+
+
+
+
+
+
+
+export async function getUser(req, res) {
+    const authHeader = req.headers.authorization;
+  
+    // Check if Authorization header is present
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ message: 'Authorization header missing or invalid' });
+    }
+  
+    // Extract the token
+    const token = authHeader.split(' ')[1];
+  
+    try {
+      // Verify the token using the JWT_SECRET_KEY from .env
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  
+      // Extract user ID from the token
+      const userId = decoded.userId;
+  
+      // Query the database to find the user by ID
+      const user = await User.findById(userId); // Replace with your database query
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      // Return the user details
+      res.json({
+        userId: user._id,
+        username: user.fullname,
+        email: user.email,
+      });
+    } catch (error) {
+      // Handle token verification errors (e.g., expired or invalid token)
+      return res.status(403).json({ message: 'Invalid or expired token' });
+    }
+  }
 
  /* line 112 const token = jwt.sign({ userId: user._id, role: user.role }, SECRET_KEY, { expiresIn: "1h" });
 

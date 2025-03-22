@@ -24,10 +24,12 @@ const verifyToken = async (req,res,next)=>{
 
         const currentUser = {
             user_id: decoded.user_id
+            
         };
-
+    
         req.current_user = currentUser;
         next();
+        console.log(currentUser)
 
     }catch(error){
         if(error instanceof jwt.TokenExpiredError){
@@ -35,7 +37,6 @@ const verifyToken = async (req,res,next)=>{
         }else{
             return res.send(errorResponseUnAuthorize());
         }
-
     }
 
 }
