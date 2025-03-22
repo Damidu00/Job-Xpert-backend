@@ -11,6 +11,8 @@ import refereeRoutes from './routes/refereesRoutes.js';
 import educationRoutes from './routes/educationRoutes.js';
 import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
+import userRouter from './routes/userRoutes.js';
+import cookieParser from 'cookie-parser';
 
 dotenv.config()
 const app = express();
@@ -20,6 +22,14 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json())
 
+//user 
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(cookieParser());
+const corsOptions = {
+    origin:'http://localhost:5173',
+    credentials:true
+}
 
 
 
@@ -45,9 +55,95 @@ app.use("/api/referees",refereeRoutes)
 app.use("/api/education",educationRoutes)
 app.use("/api/experience",ExperienceRoutes)
 app.use("/api/projects",ProjectRouter)
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// user routes
+app.use("/api/users",userRouter)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//company routes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//job-listing  route
+app.use("/api/jobs",jobRoutes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.listen(5000,()=>{
     console.log("Server is running on port 5000")
-})
-
-
+});
