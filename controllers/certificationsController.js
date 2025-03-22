@@ -3,6 +3,7 @@ import Certificates from "../models/certificationsModel.js"
 export async function createCertificates(req,res){
     try {
         const certificateDetails = req.body
+        console.log(certificateDetails)
         const certificate = new Certificates(certificateDetails)
         await certificate.save()
 

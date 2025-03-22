@@ -12,7 +12,7 @@ const skillSchema = mongoose.Schema({
     skills: [
       {
         category: { type: String, required: true },
-        items: { type: [String], required: true }
+        items: { type: String, required: true }
       }
     ]
   });
