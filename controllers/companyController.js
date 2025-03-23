@@ -76,6 +76,8 @@ export const getCompanyById = async (req,res) => {
 export const getupdateCompany = async (req,res) =>{
     try {
         const {name, description, website, location} = req.body;
+        console.log(name, description, website, location);
+        
         const file = req.file;
 
         const updateData = {name, description, website, location};
