@@ -1,15 +1,13 @@
 import mongoose from "mongoose";
 
 const cvuserSchema = mongoose.Schema({
-
-    userId : {
-        type : String,
-        required : true
-        // unique : true
+    userId: {
+        type: String,
+        required: true
     },
-    cvId : {
-        type : String,
-        required : true
+    cvId: {
+        type: String,
+        required: true
     },
     firstName: {
         type: String,
@@ -17,19 +15,21 @@ const cvuserSchema = mongoose.Schema({
         trim: true
     },
     lastName: {
-        type : String,
-        required : true,
-        trim : true
+        type: String,
+        required: true,
+        trim: true
     },
     email: {
         type: String,
         required: true,
-        // unique: true, 
-        trim: true
+        trim: true,
+        match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        
     },
     phone: {
         type: String,
-        required: true, 
+        required: true,
+        match: /^\+?[0-9]{10,15}$/
     },
     profilePhoto: {
         type: String,
@@ -38,12 +38,14 @@ const cvuserSchema = mongoose.Schema({
     linkedinURL: {
         type: String,
         default: "",
-        trim: true
+        trim: true,
+
     },
     githubURL: {
         type: String,
         default: "",
-        trim: true
+        trim: true,
+
     },
     Address: {
         type: String,
@@ -53,9 +55,10 @@ const cvuserSchema = mongoose.Schema({
     shortBio: {
         type: String,
         required: true,
-        trim: true
-    },
-})
+        trim: true,
+        maxlength: 500
+    }
+});
 
-const cvUsers = mongoose.model("cvUserDetails",cvuserSchema)
-export default cvUsers
+const cvUsers = mongoose.model("cvUserDetails", cvuserSchema);
+export default cvUsers;

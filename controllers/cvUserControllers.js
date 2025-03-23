@@ -8,12 +8,12 @@ export async function createCvUserDetails(req,res){
         const user = new cvUsers(newUserdetails)
         await user.save();
 
-        res.json({
+        res.status(200).json({
             message : "user details saved successfully"
         })
 
     } catch (error) {
-        res.json({
+        res.status(500).json({
             message : "error to save user",
             error : error.message
         })
