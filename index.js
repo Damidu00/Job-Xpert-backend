@@ -4,7 +4,6 @@ import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import dotenv from "dotenv"
 import cors from 'cors'
-import verifyToken from "./middlewares/authMiddleware.js";
 import cvUserRoutes from './routes/cvUserRoutes.js';
 import skillsRoutes from './routes/skillsroutes.js';
 import certificates from './routes/certificatesRoutes.js';
@@ -14,9 +13,12 @@ import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
 import userRouter from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import {verifyToken} from './middlewares/authMiddleware.js'
+ 
 
 dotenv.config()
 const app = express();
+ 
 
 
 const corsOptions = {
@@ -30,7 +32,7 @@ app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-
+app.use(verifyToken);
 
 
 

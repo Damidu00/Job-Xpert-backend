@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import {createError,errorResponseUnAuthorize} from "../utils/responseUtils.js";
 
-const verifyToken = async (req,res,next)=>{
+export const verifyToken = async (req,res,next)=>{
 
     const authorization = req.header("Authorization");
 
@@ -24,12 +24,10 @@ const verifyToken = async (req,res,next)=>{
 
         const currentUser = {
             user_id: decoded.user_id
-            
         };
-    
+
         req.current_user = currentUser;
         next();
-        console.log(currentUser)
 
     }catch(error){
         if(error instanceof jwt.TokenExpiredError){
@@ -37,8 +35,7 @@ const verifyToken = async (req,res,next)=>{
         }else{
             return res.send(errorResponseUnAuthorize());
         }
+
     }
 
 }
-
-export default verifyToken;
