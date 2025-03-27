@@ -13,23 +13,26 @@ import ExperienceRoutes from './routes/experienceRoutes.js';
 import ProjectRouter from './routes/projectsRouter.js';
 import userRouter from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import {verifyToken} from './middlewares/authMiddleware.js'
+ 
 
 dotenv.config()
 const app = express();
+ 
 
 
-
-app.use(cors());
+const corsOptions = {
+    origin:'http://localhost:5173',
+    credentials:true
+}
+app.use(cors(corsOptions));
 app.use(bodyParser.json())
 
 //user 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cookieParser());
-const corsOptions = {
-    origin:'http://localhost:5173',
-    credentials:true
-}
+app.use(verifyToken);
 
 
 

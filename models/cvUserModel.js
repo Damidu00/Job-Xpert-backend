@@ -5,6 +5,7 @@ const cvuserSchema = mongoose.Schema({
     userId : {
         type : String,
         required : true
+        // unique : true
     },
     cvId : {
         type : String,
@@ -12,7 +13,7 @@ const cvuserSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
-        required: true, 
+        required: true,
         trim: true
     },
     lastName: {
@@ -22,8 +23,8 @@ const cvuserSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true, 
-        unique: true, 
+        required: true,
+        // unique: true, 
         trim: true
     },
     phone: {
