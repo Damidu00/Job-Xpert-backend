@@ -165,3 +165,15 @@ export const deleteUser = async (req, res) => {
         res.status(500).json({ message: "Internal server error", success: false });
     }
 };
+
+ export const getAllUsers = async (req, res) => {
+    try {
+      console.log("Fetching all users..."); // Debugging log
+      const users = await User.find({}, "_id fullname email role");
+      console.log("Fetched users:", users); // Debugging log
+      res.json(users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ message: "Internal server error", success: false });
+    }
+  };
