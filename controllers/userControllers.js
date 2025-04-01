@@ -177,3 +177,46 @@ export const deleteUser = async (req, res) => {
       res.status(500).json({ message: "Internal server error", success: false });
     }
   };
+
+  export const deleteUserByAdmin = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const adminId = req.id; // The logged-in admin's ID
+
+        if (userId === adminId) {
+            return res.status(403).json({ message: "You cannot delete your own account", success: false });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false });
+        }
+
+        // Delete profile photo from Cloudinary if it exists
+        if (user.profile.profilePhoto) {
+            try {
+                const publicId = user.profile.profilePhoto.split('/').pop().split('.')[0];
+                await cloudinary.uploader.destroy(publicId);
+            } catch (error) {
+                console.error("Error deleting profile photo from Cloudinary:", error);
+            }
+        }
+
+        // Delete resume from Cloudinary if it exists
+        if (user.profile.resume) {
+            try {
+                const publicId = user.profile.resume.split('/').pop().split('.')[0];
+                await cloudinary.uploader.destroy(publicId, { resource_type: "raw" });
+            } catch (error) {
+                console.error("Error deleting resume from Cloudinary:", error);
+            }
+        }
+
+        await User.findByIdAndDelete(userId);
+
+        return res.status(200).json({ message: "User deleted successfully", success: true });
+    } catch (error) {
+        console.error("Delete User By Admin Error:", error);
+        res.status(500).json({ message: "Internal server error", success: false });
+    }
+};

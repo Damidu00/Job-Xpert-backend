@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllUsers, getUser, login, logout, register, updateProfile, } from "../controllers/userControllers.js";
+import { deleteUserByAdmin, getAllUsers, getUser, login, logout, register, updateProfile, } from "../controllers/userControllers.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 import { singleUpload } from "../middlewares/multer.js";
 import { deleteUser } from "../controllers/userControllers.js";
@@ -12,6 +12,8 @@ userRouter.route("/currentuser").get (isAuthenticated, getUser);
 userRouter.route("/profile/update").post(isAuthenticated,singleUpload,updateProfile);
 userRouter.route("/delete").delete(isAuthenticated,deleteUser);
 userRouter.route("/getAllUsers").get(isAuthenticated,getAllUsers)
+userRouter.route("/delete/:userId").delete(isAuthenticated,deleteUserByAdmin);
+
 
 
 
