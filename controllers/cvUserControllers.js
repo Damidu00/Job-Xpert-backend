@@ -3,6 +3,8 @@ import cvUsers from "../models/cvUserModel.js";
 export async function createCvUserDetails(req,res){
     try {
         const newUserdetails = req.body;
+        const userId = req.body.userId
+        console.log(userId)
         const user = new cvUsers(newUserdetails)
         await user.save();
 
@@ -20,6 +22,7 @@ export async function createCvUserDetails(req,res){
 
 export async function getcvUsers(req,res){
     const userId = req.params.userId
+    // console.log(userId)
     try {
         const cvUser = await cvUsers.findOne({userId : userId})
 
