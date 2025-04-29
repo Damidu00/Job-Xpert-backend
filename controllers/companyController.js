@@ -52,7 +52,7 @@ export const getCompany = async (req,res) => {
     }
 }
 
-//get company by id
+//get company deytails by id
 export const getCompanyById = async (req,res) => {
     try {
         const companyId = req.params.id;
