@@ -1,131 +1,142 @@
-# 🚀 Job-Xpert Frontend
+# 💼 Job Expert Backend
 
-A modern, feature-rich **React-based job portal** frontend built with performance, scalability, and user experience in mind. Designed to support job seekers and admins with elegant UI and intuitive workflows.
-
-![React](https://img.shields.io/badge/React-v19-blue?logo=react)
-![Vite](https://img.shields.io/badge/Vite-Build_Tool-yellow?logo=vite)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Utility--First-blue?logo=tailwindcss)
-![Material-UI](https://img.shields.io/badge/Material--UI-Design_System-purple?logo=mui)
-![License](https://img.shields.io/badge/license-MIT-green)
+> 🚀 A modern Node.js/Express.js backend for the **Job Expert** platform — empowering secure job posting, user authentication, and application management through a RESTful API architecture.
 
 ---
 
-## 🧠 Overview
+## 📌 Overview
 
-**Job-Xpert** is a responsive and modular frontend application designed to power a comprehensive **job portal system**. It supports multiple user roles, a secure authentication flow, and smooth navigation using modern React architecture.
-
----
-
-## 🏗️ Tech Stack
-
-| Category          | Technologies                                           |
-|-------------------|--------------------------------------------------------|
-| Frontend Core     | ⚛️ React (v19), Vite, TypeScript (optional)           |
-| Styling           | 🎨 TailwindCSS, Material-UI, React Icons               |
-| Routing           | 🔁 React Router DOM                                   |
-| HTTP Requests     | 🔗 Axios                                               |
-| UX Enhancements   | 🔔 React Hot Toast, 🧊 SweetAlert2                     |
-| Code Quality      | ✅ ESLint                                              |
+**Job Expert Backend** is the server-side engine for the Job Expert web application. It handles user authentication, job and CV management, company profiles, and secure API communication. Designed for scalability and maintainability, this backend integrates seamlessly with a React.js frontend and a MongoDB database.
 
 ---
 
-## 📁 Project Structure
+## 🗂️ Project Structure
 
 ```bash
-src/
-├── assets/         # 📦 Static files (images, etc.)
-├── Components/     # 🧩 Reusable UI components
-├── pages/          # 📄 Main application pages
-│   ├── home/       # 🏠 Homepage related components
-│   └── admin/      # 🛠️ Admin dashboard components
-├── utils/          # 🔧 Utility functions
-├── App.jsx         # 🔌 Main app logic
-├── main.jsx        # 🧬 App entry point
-└── auth.js         # 🔐 Authentication logic
+#📦 job-expert-backend
+├── index.js # App entry point 
+├── controllers/ # Core business logic 
+├── models/ # Mongoose schemas for data modeling 
+├── routes/ # Express routes per resource 
+├── middlewares/ # Auth, file uploads, error handling 
+├── utils/ # Cloud uploads, formatting helpers 
+├── .env # Environment variables 
+├── package.json # Dependencies & scripts 
+└── README.md # Project documentation
 ```
-## 🌐 Routing Structure
+## 🛠️ Tech Stack
 
-/             -> Home Page
-/login        -> Login Page
-/signup       -> Signup Page
-/admin/*      -> Admin Dashboard
-/cvdashboard  -> CV Dashboard
+| Tech/Tool         | Description                              |
+|-------------------|------------------------------------------|
+| **Node.js**        | JavaScript runtime (server-side)         |
+| **Express.js**     | Web framework for APIs and middleware    |
+| **MongoDB**        | NoSQL database for storage               |
+| **Mongoose**       | MongoDB ODM for schema definitions       |
+| **JWT**            | Token-based secure authentication        |
+| **bcryptjs**       | Secure password hashing                  |
+| **cloudinary**     | Media file storage and CDN               |
+| **multer**         | File upload handling                     |
+| **dotenv**         | Manage environment configs               |
+| **nodemon**        | Live reloading during development        |
+| **cors**           | Cross-Origin Resource Sharing            |
+| **cookie-parser**  | Parse HTTP cookies                       |
+| **body-parser**    | Parse incoming request bodies            |
 
-## 🔐 Authentication
+## 📐 Architecture
 
-✅ Secure Login / Signup system
-🔐 Protected Routes using role-based access
-🔄 Persistent login state with frontend auth logic
+✅ **RESTful API** — Each resource has its own route, controller, and model  
+✅ **MVC Pattern** — Clear separation of concerns  
+✅ **Middleware-Driven** — Authentication, file handling, and validation  
+✅ **Modular** — Scalable code structure for large teams/projects  
+✅ **Secure** — JWT authentication, hashed passwords, environment config
 
-## ✨ Features
+---
 
-🪄 Modern UI with Material-UI and TailwindCSS
-🧠 Hooks-first approach for clean state management
-📨 CV Dashboard for job seekers
-🛠️ Admin Panel for managing platform content
-🍞 Toast notifications with React Hot Toast
-❗ User-friendly alerts using SweetAlert2
-🔁 Smooth routing with React Router DOM
-📱 Fully responsive design across all devices
+## 🚀 Getting Started
 
-## 🧪 Getting Started
-
-# ▶️ Run Locally
+### 1. Clone the Repository
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/job-xpert-frontend.git
+git clone https://github.com/your-username/job-expert-backend.git
+cd job-expert-backend
+```
+### 2. Install Dependencies
 
-# Navigate into the project
-cd job-xpert-frontend
-
-# Install dependencies
+```bash
 npm install
+```
 
-# Start the development server
+### 3. Setup Environment Variables
+Create a .env file in the root with the following:
+
+```bash
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+### 4. Start the Server
+
+```bash
+npm run dev
+```
+> 🟢 The server will start on http://localhost:5000 (or your specified port).
+
+## 📬 API Endpoints (Sample)
+
+| Method | Endpoint               | Description                     |
+|--------|------------------------|---------------------------------|
+| POST   | `/api/auth/register`   | Register a new user             |
+| POST   | `/api/auth/login`      | Login and receive a token       |
+| GET    | `/api/jobs`            | Fetch all job postings          |
+| POST   | `/api/jobs`            | Create a new job (admin only)   |
+| PUT    | `/api/jobs/:id`        | Update a job                    |
+| DELETE | `/api/jobs/:id`        | Delete a job                    |
+| POST   | `/api/cv/upload`       | Upload CV with Cloudinary       |
+
+## 📦 Features
+
+- 🔐 **JWT-based authentication** 
+- 🏢 **Company and job posting management** 
+- 📄 **CV, education, and experience handling** 
+- 📸 **Cloudinary image/file uploads** 
+- ✅ **ustom middleware for authentication & role control** 
+- ⚙️ **Clean MVC and modular architecture** 
+- 📈 **Scalable and production-ready** 
+
+---
+
+## 🧰 Scripts
+
+```bash
+# Start development server with live reload
 npm run dev
 
+# Start production server
+npm start
 ```
-## 🔨 Build for Production
+## 🧪 Development Tips
 
-```bash
-npm run build
-```
-## 🧑‍💻 Development Methodologies
+Keep .env out of version control (.gitignore)
+Use tools like Postman or Insomnia to test endpoints
+Validate all inputs and handle edge cases in controllers
 
-✅ Component-based architecture
-🗂️ Separation of concerns with pages, components, and utils
-🧼 Linting with ESLint
-🔁 Hot Module Replacement (HMR) with Vite
-🔍 TypeScript-ready configuration
+## 🙌 Contributing
 
-## 🙌 Contribution Guide
+We welcome contributions! Fork the repo, make changes, and open a PR. Please follow best practices and keep code modular and clean.
 
-# We welcome all contributions! To get started:
-```bash
-# Fork the repo and clone your copy
-git clone https://github.com/your-username/job-xpert-frontend.git
-
-# Create a new branch
-git checkout -b feature/your-feature-name
-
-# Commit your changes
-git commit -m "Added a cool feature"
-
-# Push to your fork
-git push origin feature/your-feature-name
-
-# Open a Pull Request 🎉
-```
 ## 📃 License
 
-This project is licensed under the MIT License. See LICENSE for details.
+This project is licensed under the MIT License.
 
-## 💬 Feedback
+## 👥 Authors
 
-# We’d love to hear your feedback! Feel free to:
-📧 Open issues
-🛠️ Submit pull requests
-🤝 Contact the team
+- 👨‍💻 Damidu Nayanajith  [🌐 Visit My GitHub](https://github.com/Damidu00)
+- 📧 Email: damidunayanajith2001@gmail.com
+- 💼 LinkedIn: [My LinkedIn Profile](https://www.linkedin.com/in/damidu-dissanayake/)
 
-## Made with ❤️ using React, Vite, Material-UI, and TailwindCSS.
+## 💼 Built for the Job Expert platform
+## Made with ❤️ and clean architecture
