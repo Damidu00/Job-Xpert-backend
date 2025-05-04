@@ -16,6 +16,6 @@ import multer from "multer";
 
 const storage = multer.memoryStorage(); // Store files in memory as buffers
 
-const singleUpload = multer({ storage }).single("file"); // "file" should match the frontend form field name
+const singleUpload = multer({ storage }).single("resume"); // Changed from "file" to "resume" to match frontend
 
 export { singleUpload };
