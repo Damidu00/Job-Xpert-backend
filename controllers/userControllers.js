@@ -92,14 +92,26 @@ export const updateProfile = async (req, res) => {
         user.profile.bio = bio || user.profile.bio;
         user.profile.skills = skills ? skills.split(",") : user.profile.skills;
 
-        if (req.file) {
+        // Handle resume upload
+        if (req.files && req.files.resume) {
             try {
-                const fileUri = getDataUri(req.file);
+                const fileUri = getDataUri(req.files.resume[0]);
                 const cloudResponse = await cloudinary.uploader.upload(fileUri.content, { resource_type: "raw" });
                 user.profile.resume = cloudResponse.secure_url;
-                user.profile.resumeOriginalName = req.file.originalname;
+                user.profile.resumeOriginalName = req.files.resume[0].originalname;
             } catch (uploadError) {
                 return res.status(500).json({ message: "Error uploading resume", success: false });
+            }
+        }
+
+        // Handle profile photo upload
+        if (req.files && req.files.profilePhoto) {
+            try {
+                const fileUri = getDataUri(req.files.profilePhoto[0]);
+                const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+                user.profile.profilePhoto = cloudResponse.secure_url;
+            } catch (uploadError) {
+                return res.status(500).json({ message: "Error uploading profile photo", success: false });
             }
         }
 
